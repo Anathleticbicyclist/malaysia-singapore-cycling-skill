@@ -62,6 +62,7 @@ malaysia-singapore-cycling-skill/
 
 ```bash
 git clone https://github.com/Anathleticbicyclist/malaysia-singapore-cycling-skill.git
+mkdir -p ~/.claude/skills
 cp -r malaysia-singapore-cycling-skill/skill ~/.claude/skills/malaysia-singapore-cycling
 ```
 
@@ -69,10 +70,13 @@ Windows PowerShell：
 
 ```powershell
 git clone https://github.com/Anathleticbicyclist/malaysia-singapore-cycling-skill.git
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\skills" | Out-Null
 Copy-Item -Recurse .\malaysia-singapore-cycling-skill\skill "$env:USERPROFILE\.claude\skills\malaysia-singapore-cycling"
 ```
 
 要点：**`SKILL.md` 必须位于技能目录根部**。不同 Agent 的 skills 目录位置不同，按其文档放置即可；目录名建议与 `SKILL.md` 里的 `name` 一致。
+
+注意：**目标父目录必须先存在**。`~/.claude` 或 `~/.claude/skills` 尚未创建时，`cp -r` 会直接报错而不是自动创建——所以上面两条命令都先建目录。若目标目录已存在旧版本，`cp -r` 是合并式覆盖，不会先清空，重装前建议先删掉旧目录。
 
 装好后无需手动点名，用自然语言描述任务就会命中。可直接这么说：
 
